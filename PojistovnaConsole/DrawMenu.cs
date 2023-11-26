@@ -49,6 +49,8 @@ namespace PojistovnaConsole
         {
             while (true)
             {
+                Console.Clear();
+
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Press a key to start an action:");
                 Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -69,7 +71,7 @@ namespace PojistovnaConsole
                 Console.ResetColor();
                 Console.WriteLine("\tSearch for a specific customer");
 
-                Console.BackgroundColor = ConsoleColor.DarkYellow;
+                Console.BackgroundColor = ConsoleColor.DarkRed;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Write("[ 4 ]");
                 Console.ResetColor();
@@ -77,6 +79,39 @@ namespace PojistovnaConsole
                 Console.ResetColor();
 
                 MenuActions.HandleKeyPress();
+            }
+        }
+
+        /// <summary>
+        /// Animation that says "Press any key to continue" and waits for user before clearing the console. Console Clear not included!
+        /// </summary>
+        /// <param name="character">Takes any character that will be animated. Leave empty for ">"</param>
+        public static void ConfirmContinue(char character = '>')
+        {
+            Console.CursorVisible = false;
+            Console.Write("Press any key to continue ");
+
+            while (!Console.KeyAvailable)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(character + "  ");
+                Console.Write(new string('\b', 3));
+                Thread.Sleep(200);
+                Console.Write(" " + character + " ");
+                Console.Write(new string('\b', 3));
+                Thread.Sleep(200);
+                Console.Write("  " + character);
+                Console.Write(new string('\b', 3));
+                Thread.Sleep(200);
+                Console.Write("   ");
+                Console.Write(new string('\b', 3));
+                Thread.Sleep(400);
+                Console.ResetColor();
+            }
+
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
             }
         }
     }

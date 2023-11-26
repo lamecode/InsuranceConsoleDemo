@@ -130,6 +130,7 @@ namespace PojistovnaConsole
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("Entry successfuly recorded");
             Console.ResetColor();
+            DrawMenu.ConfirmContinue();
         }
 
         /// <summary>

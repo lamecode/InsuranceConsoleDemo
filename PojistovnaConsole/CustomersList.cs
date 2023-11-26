@@ -37,21 +37,33 @@ namespace PojistovnaConsole
         /// </summary>
         public static void ListCustomers()
         {
-            for (int i = 0; i < TempDatabase.Count; i++)
+            if (TempDatabase.Count <= 0)
             {
-                if (i % 2 == 0)
+                // No results found
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine("The database is empty or no results could be shown.");
+                Console.ResetColor();
+            }
+            else
+            {
+                for (int i = 0; i < TempDatabase.Count; i++)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkCyan;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                }
+                    if (i % 2 == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    }
 
-                Console.WriteLine(TempDatabase[i]);
+                    Console.WriteLine(TempDatabase[i]);
+                }
             }
 
             Console.ResetColor();
+            DrawMenu.ConfirmContinue();
         }
         /// <summary>
         /// Search customer databse for a specific customer.
@@ -106,14 +118,16 @@ namespace PojistovnaConsole
                     resultsIndex++;
                 }
                 Console.ResetColor();
+                DrawMenu.ConfirmContinue();
             }
             else
             {
                 // No results found
-                Console.BackgroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.DarkRed;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine("Search ended with 0 results.");
                 Console.ResetColor();
+                DrawMenu.ConfirmContinue();
             }
         }
 
